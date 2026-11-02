@@ -4,7 +4,17 @@ Built at `dist/codex/`. The package uses Codex's documented `.codex-plugin/plugi
 
 ## Try from GitHub
 
-Run `codex plugin marketplace add marvellousnishith/inception`, then install Inception from the Codex desktop app's plugin directory. Codex CLI manages marketplace sources; use the desktop app to install and test a local plugin.
+Add the GitHub marketplace:
+
+```sh
+codex plugin marketplace add marvellousnishith/inception
+```
+
+Install Inception from the command line:
+
+```sh
+codex plugin add inception@marvellousnishith
+```
 
 ## Try a generated package locally
 
@@ -24,4 +34,16 @@ Build from the repository root with `npm run build`. To use the documented local
 }
 ```
 
-Register that marketplace root with `codex plugin marketplace add /absolute/path/to/marketplace-root`, then use the Codex desktop app's plugin directory to install it. Restart or refresh as directed by Codex after updating the copied package. No global settings are changed by this repository.
+Register that marketplace root:
+
+```sh
+codex plugin marketplace add /absolute/path/to/marketplace-root
+```
+
+Then install the plugin using the marketplace name in that catalog:
+
+```sh
+codex plugin add inception@marvellousnishith
+```
+
+Use `codex plugin marketplace list` to inspect configured marketplaces. No global settings are changed by this repository itself.
