@@ -18,7 +18,7 @@ Build packages are generated in `dist/codex/` and `dist/claude-code/`; `dist/` i
 ## Try locally
 
 - **Claude Code, from this checkout:** from a project, run `claude --plugin-dir /absolute/path/to/agents`, then invoke `/inception:plan`. The repository root is the plugin root.
-- **Claude Code, from GitHub:** run `/plugin marketplace add nisheeth/inception`, then `/plugin install inception@inception`.
+- **Claude Code, from GitHub:** run `/plugin marketplace add nisheeth/inception`, then `/plugin install inception@nisheeth`.
 - **Codex, from GitHub:** run `codex plugin marketplace add nisheeth/inception`, then install Inception from the Codex desktop app's plugin directory. The repository catalog is `.agents/plugins/marketplace.json`. See [Codex package instructions](platforms/codex/README.md).
 - **Generated packages:** run `npm run build` for standalone packages in `dist/`; these can be loaded using Claude Code `--plugin-dir` or registered in a local Codex marketplace.
 

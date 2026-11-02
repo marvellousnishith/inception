@@ -12,7 +12,7 @@ Build from the repository root with `npm run build`. To use the documented local
 
 ```json
 {
-  "name": "inception-local",
+  "name": "nisheeth",
   "plugins": [
     {
       "name": "inception",
