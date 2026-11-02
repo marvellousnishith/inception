@@ -1,0 +1,12 @@
+{
+  "name": "inception",
+  "description": "Plugins published by nisheeth/inception.",
+  "owner": { "name": "Nisheeth Shah" },
+  "plugins": [
+    {
+      "name": "inception",
+      "source": "./",
+      "description": "Portable plugin toolkit with a read-only project planning skill."
+    }
+  ]
+}
