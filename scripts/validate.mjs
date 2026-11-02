@@ -27,11 +27,11 @@ for (const [platform, rel] of [['codex', '.codex-plugin/plugin.json'], ['claude-
     if (platform === 'claude-code') {
       const marketplace = await readJson(path.join(root, '.claude-plugin/marketplace.json'));
       const entry = marketplace.plugins?.find((plugin) => plugin.name === manifest.name);
-      if (marketplace.name !== 'nisheeth' || entry?.source !== './') throw new Error('Claude marketplace must be nisheeth and expose the root inception plugin');
+      if (marketplace.name !== 'marvellousnishith' || entry?.source !== './') throw new Error('Claude marketplace must be marvellousnishith and expose the root inception plugin');
     } else {
       const marketplace = await readJson(path.join(root, '.agents/plugins/marketplace.json'));
       const entry = marketplace.plugins?.find((plugin) => plugin.name === manifest.name);
-      if (marketplace.name !== 'nisheeth' || entry?.source?.path !== './') throw new Error('Codex marketplace must be nisheeth and expose the root inception plugin');
+      if (marketplace.name !== 'marvellousnishith' || entry?.source?.path !== './') throw new Error('Codex marketplace must be marvellousnishith and expose the root inception plugin');
     }
   });
 }

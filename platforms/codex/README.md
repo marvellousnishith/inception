@@ -4,7 +4,7 @@ Built at `dist/codex/`. The package uses Codex's documented `.codex-plugin/plugi
 
 ## Try from GitHub
 
-Run `codex plugin marketplace add nisheeth/inception`, then install Inception from the Codex desktop app's plugin directory. Codex CLI manages marketplace sources; use the desktop app to install and test a local plugin.
+Run `codex plugin marketplace add marvellousnishith/inception`, then install Inception from the Codex desktop app's plugin directory. Codex CLI manages marketplace sources; use the desktop app to install and test a local plugin.
 
 ## Try a generated package locally
 
@@ -12,7 +12,7 @@ Build from the repository root with `npm run build`. To use the documented local
 
 ```json
 {
-  "name": "nisheeth",
+  "name": "marvellousnishith",
   "plugins": [
     {
       "name": "inception",

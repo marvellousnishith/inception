@@ -39,10 +39,10 @@ test('repository root is directly loadable and listed in Claude marketplace', as
     assert.equal(manifest.version, '0.1.0');
   }
   assert.equal(marketplace.plugins[0].name, 'inception');
-  assert.equal(marketplace.name, 'nisheeth');
+  assert.equal(marketplace.name, 'marvellousnishith');
   assert.equal(marketplace.plugins[0].source, './');
   assert.equal(codexMarketplace.plugins[0].name, 'inception');
-  assert.equal(codexMarketplace.name, 'nisheeth');
+  assert.equal(codexMarketplace.name, 'marvellousnishith');
   assert.equal(codexMarketplace.plugins[0].source.path, './');
   await access(path.join(root, 'skills/plan/SKILL.md'));
 });

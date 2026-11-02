@@ -2,7 +2,7 @@
 
 Inception 0.1.0 packages one Markdown planning skill for Codex and Claude Code. It does not include agents, commands, hooks, integrations, or a universal manifest. Shared skill instructions avoid platform-specific command names, while each host retains its own manifest and discovery behavior.
 
-The GitHub repository root acts as the `nisheeth` marketplace and directly hosts the `inception` plugin. Claude Code can add `nisheeth/inception` as a marketplace and install `inception@nisheeth`. Codex uses its own compatibility manifest and marketplace catalog. Generated standalone packages remain available in `dist/`.
+The GitHub repository root acts as the `marvellousnishith` marketplace and directly hosts the `inception` plugin. Claude Code can add `marvellousnishith/inception` as a marketplace and install `inception@marvellousnishith`. Codex uses its own compatibility manifest and marketplace catalog. Generated standalone packages remain available in `dist/`.
 
 `npm run validate` checks repository source manifests, skill metadata, and package-local references. `npm test` checks the generated package layout. These are repository checks, not official host validators. No official Codex or Claude Code plugin validator is invoked by these scripts; actual loading should be checked in each host using the local workflows in the platform READMEs.
 
