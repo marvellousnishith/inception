@@ -60,6 +60,12 @@ duplicating it; add or reorganize navigation so pages are discoverable. The laun
 - Keep the root README concise: explain the project and give exact dependency-install, preview, and build commands.
 - Match the repository's existing package manager and script conventions. Zensical is installed as a Python package;
   do not claim npm installs Zensical unless the project explicitly sets that up.
+- Add or update a root `requirements.txt` that includes the Zensical Python package, unless the user explicitly asks
+  not to. Respect any existing Python dependency/version convention; do not invent a version pin. If the repository
+  already uses another Python dependency manifest, keep its dependency declaration consistent with `requirements.txt`.
+  Explain the setup in the README, including creating `.venv` and installing the requirements. Show platform-specific
+  commands such as `python -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt` on macOS/Linux, and
+  `py -m venv .venv`, `.venv\\Scripts\\python.exe -m pip install -r requirements.txt` on Windows.
 - The bundled launchers must resolve the target repository from their own location, use an existing repository
   `.venv` or `venv` when present, and run Zensical in that environment. They may use an already active environment or
   a Zensical executable on `PATH` when no repository environment exists. Never create an environment, install
