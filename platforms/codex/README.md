@@ -31,7 +31,8 @@ rebuild it and update the copy in your local marketplace, then restart the app.
 
 In Codex, invoke `$plan` to get a plan without implementation changes. Invoke `$zensical-docs` to create or improve a
 beginner-friendly Zensical documentation site in the current repository. You can also choose either skill from the
-skill picker.
+skill picker. The Zensical workflow adds project launchers at `scripts/zensical/run.sh` and
+`scripts/zensical/run.bat` so you can preview or build outside the Codex session.
 
 ## Try from a local checkout
 

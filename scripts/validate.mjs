@@ -8,6 +8,7 @@ const errors = [];
 const check = async (label, fn) => { try { await fn(); } catch (error) { errors.push(`${label}: ${error.message}`); } };
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 const skillsDir = path.join(root, 'skills');
+const requiredSkillResources = { 'zensical-docs': ['scripts/run.sh', 'scripts/run.bat'] };
 let skillNames = [];
 
 for (const [platform, rel] of [['codex', '.codex-plugin/plugin.json'], ['claude-code', '.claude-plugin/plugin.json']]) {
@@ -50,6 +51,9 @@ await check('skill metadata', async () => {
     const description = match[1].match(/^description:\s*(.+)$/m)?.[1]?.trim();
     if (skillName !== name) throw new Error(`${name}/SKILL.md name must match directory`);
     if (!description) throw new Error(`${name}/SKILL.md description is required`);
+    for (const resource of requiredSkillResources[name] ?? []) {
+      await access(path.join(skillsDir, name, resource));
+    }
   }
 });
 
@@ -65,6 +69,9 @@ for (const platform of ['codex', 'claude-code']) {
       const skill = await readFile(skillPath, 'utf8');
       if (name === 'plan' && !skill.includes('Return a concise, actionable plan')) {
         throw new Error('shared plan skill is missing or incomplete');
+      }
+      for (const resource of requiredSkillResources[name] ?? []) {
+        await access(path.join(dir, 'skills', name, resource));
       }
       if (platform === 'codex') await access(path.join(dir, manifest.skills, name, 'SKILL.md'));
       const references = [...skill.matchAll(/\]\(([^)]+)\)/g)].map((match) => match[1]);

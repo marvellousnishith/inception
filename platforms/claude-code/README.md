@@ -36,7 +36,8 @@ Otherwise, start a new Claude Code session to load the updated plugin.
 ## Use the workflows
 
 Invoke `/inception:plan` to plan a change without implementation edits. Invoke `/inception:zensical-docs` to create or
-improve a Zensical documentation site in the current repository.
+improve a Zensical documentation site in the current repository. The Zensical workflow adds project launchers at
+`scripts/zensical/run.sh` and `scripts/zensical/run.bat` so you can preview or build outside the Claude Code session.
 
 ## Try from a local checkout
 
