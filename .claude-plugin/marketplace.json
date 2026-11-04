@@ -6,7 +6,7 @@
     {
       "name": "inception",
       "source": "./",
-      "description": "Portable plugin toolkit with a read-only project planning skill."
+      "description": "Portable plugin toolkit with shared planning and Zensical documentation workflows."
     }
   ]
 }

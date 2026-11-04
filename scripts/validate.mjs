@@ -8,6 +8,7 @@ const errors = [];
 const check = async (label, fn) => { try { await fn(); } catch (error) { errors.push(`${label}: ${error.message}`); } };
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 const skillsDir = path.join(root, 'skills');
+let skillNames = [];
 
 for (const [platform, rel] of [['codex', '.codex-plugin/plugin.json'], ['claude-code', '.claude-plugin/plugin.json']]) {
   await check(`${platform} source manifest`, async () => {
@@ -39,15 +40,16 @@ for (const [platform, rel] of [['codex', '.codex-plugin/plugin.json'], ['claude-
 await check('skill metadata', async () => {
   const entries = await readdir(skillsDir, { withFileTypes: true });
   if (!entries.some((entry) => entry.isDirectory())) throw new Error('no skill directories found');
-  for (const entry of entries.filter((item) => item.isDirectory())) {
-    const file = path.join(skillsDir, entry.name, 'SKILL.md');
+  skillNames = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
+  for (const name of skillNames) {
+    const file = path.join(skillsDir, name, 'SKILL.md');
     const body = await readFile(file, 'utf8');
     const match = body.match(/^---\s*\n([\s\S]*?)\n---\s*(?:\n|$)/);
-    if (!match) throw new Error(`${entry.name}/SKILL.md needs YAML frontmatter`);
-    const name = match[1].match(/^name:\s*(.+)$/m)?.[1]?.trim();
+    if (!match) throw new Error(`${name}/SKILL.md needs YAML frontmatter`);
+    const skillName = match[1].match(/^name:\s*(.+)$/m)?.[1]?.trim();
     const description = match[1].match(/^description:\s*(.+)$/m)?.[1]?.trim();
-    if (name !== entry.name) throw new Error(`${entry.name}/SKILL.md name must match directory`);
-    if (!description) throw new Error(`${entry.name}/SKILL.md description is required`);
+    if (skillName !== name) throw new Error(`${name}/SKILL.md name must match directory`);
+    if (!description) throw new Error(`${name}/SKILL.md description is required`);
   }
 });
 
@@ -58,15 +60,20 @@ for (const platform of ['codex', 'claude-code']) {
     const rel = platform === 'codex' ? '.codex-plugin/plugin.json' : '.claude-plugin/plugin.json';
     const manifest = await readJson(path.join(dir, rel));
     if (manifest.version !== pkg.version) throw new Error('packaged version mismatch');
-    const skill = await readFile(path.join(dir, 'skills/plan/SKILL.md'), 'utf8');
-    if (!skill.includes('Return a concise, actionable plan')) throw new Error('shared plan skill is missing or incomplete');
-    if (platform === 'codex') await access(path.join(dir, manifest.skills, 'plan/SKILL.md'));
-    const references = [...skill.matchAll(/\]\(([^)]+)\)/g)].map((match) => match[1]);
-    for (const reference of references) {
-      if (/^[a-z]+:/i.test(reference) || reference.startsWith('#')) continue;
-      const target = path.resolve(path.dirname(path.join(dir, 'skills/plan/SKILL.md')), reference.split('#')[0]);
-      if (!target.startsWith(`${dir}${path.sep}`)) throw new Error(`reference escapes package: ${reference}`);
-      await access(target);
+    for (const name of skillNames) {
+      const skillPath = path.join(dir, 'skills', name, 'SKILL.md');
+      const skill = await readFile(skillPath, 'utf8');
+      if (name === 'plan' && !skill.includes('Return a concise, actionable plan')) {
+        throw new Error('shared plan skill is missing or incomplete');
+      }
+      if (platform === 'codex') await access(path.join(dir, manifest.skills, name, 'SKILL.md'));
+      const references = [...skill.matchAll(/\]\(([^)]+)\)/g)].map((match) => match[1]);
+      for (const reference of references) {
+        if (/^[a-z]+:/i.test(reference) || reference.startsWith('#')) continue;
+        const target = path.resolve(path.dirname(skillPath), reference.split('#')[0]);
+        if (!target.startsWith(`${dir}${path.sep}`)) throw new Error(`reference escapes package: ${reference}`);
+        await access(target);
+      }
     }
   });
 }

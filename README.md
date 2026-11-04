@@ -1,10 +1,12 @@
 # Inception
 
-Inception is a portable plugin toolkit for Codex and Claude Code. The initial 0.1.0 release provides one shared workflow:
-`plan`. It inspects relevant project context and returns an actionable implementation plan without changing files.
+Inception is a portable plugin toolkit for Codex and Claude Code. It provides two shared workflows: `plan` creates an
+implementation plan without changing files, and `zensical-docs` creates or improves a beginner-friendly Zensical
+documentation site in the current repository. Each provider packages the same skill sources using its native plugin
+format.
 
-This release contains no agents, hooks, integrations, backend, or installer. Each provider uses its own native plugin
-manifest and marketplace format.
+The initial release contains no agents, hooks, integrations, backend, or custom installer. Each provider uses its own
+native plugin manifest and marketplace format.
 
 ## Development
 
@@ -29,102 +31,12 @@ npm test
 The source version is maintained in `package.json` (`0.1.0`). The build creates standalone packages under `dist/`, which
 is ignored by Git.
 
-## Codex
+## Using Inception
 
-The repository root contains Codex's compatibility manifest at `.codex-plugin/plugin.json`. The marketplace catalog is
-`.agents/plugins/marketplace.json`.
+Installation, updates, and local loading differ by provider. Follow the guide for the host you use:
 
-### Install from GitHub
-
-Add the marketplace:
-
-```sh
-codex plugin marketplace add marvellousnishith/inception
-```
-
-Install the plugin from that marketplace:
-
-```sh
-codex plugin add inception@marvellousnishith
-```
-
-### Try from a local checkout
-
-Add the checkout as a marketplace:
-
-```sh
-codex plugin marketplace add /absolute/path/to/agents
-```
-
-Install the plugin:
-
-```sh
-codex plugin add inception@marvellousnishith
-```
-
-### Build and load the standalone package
-
-Build the platform package:
-
-```sh
-npm run build
-```
-
-The package is written to `dist/codex/`. Expose that directory through a local Codex marketplace, add the marketplace,
-then install it with `codex plugin add inception@<marketplace-name>`; see [Codex package instructions](platforms/codex/README.md).
-
-## Claude Code
-
-The repository root contains Claude Code's native manifest at `.claude-plugin/plugin.json` and its marketplace catalog at
-`.claude-plugin/marketplace.json`.
-
-### Install from GitHub
-
-Add the marketplace in Claude Code:
-
-```text
-/plugin marketplace add marvellousnishith/inception
-```
-
-Install the plugin:
-
-```text
-/plugin install inception@marvellousnishith
-```
-
-Run the skill:
-
-```text
-/inception:plan
-```
-
-### Try from a local checkout
-
-Start Claude Code from a project and load the repository root for that session:
-
-```sh
-claude --plugin-dir /absolute/path/to/agents
-```
-
-Then invoke the skill in Claude Code:
-
-```text
-/inception:plan
-```
-
-### Build and load the standalone package
-
-Build the platform package:
-
-```sh
-npm run build
-```
-
-The package is written to `dist/claude-code/`. Load it for a session with:
-
-```sh
-claude --plugin-dir /absolute/path/to/agents/dist/claude-code
-```
+- [Codex: install, update, and load Inception](platforms/codex/README.md)
+- [Claude Code: install, update, and load Inception](platforms/claude-code/README.md)
 
 ## Repository layout
 

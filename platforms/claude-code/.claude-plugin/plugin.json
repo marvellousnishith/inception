@@ -1,5 +1,5 @@
 {
   "name": "inception",
   "version": "0.1.0",
-  "description": "Portable plugin toolkit for Codex and Claude Code, with a project planning skill."
+  "description": "Portable plugin toolkit for Codex and Claude Code, with shared planning and Zensical documentation workflows."
 }

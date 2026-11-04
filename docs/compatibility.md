@@ -1,6 +1,6 @@
 # Compatibility and validation
 
-Inception 0.1.0 packages one Markdown planning skill for Codex and Claude Code. It does not include agents, commands, hooks, integrations, or a universal manifest. Shared skill instructions avoid platform-specific command names, while each host retains its own manifest and discovery behavior.
+Inception 0.1.0 packages two shared Markdown workflows for Codex and Claude Code: `plan` and `zensical-docs`. The latter creates or improves a Zensical documentation site in the current repository. The plugin does not include custom agent definitions, hooks, integrations, or a universal manifest. Shared skill instructions avoid platform-specific tool names, while each host retains its own manifest and invocation convention.
 
 The GitHub repository root acts as the `marvellousnishith` marketplace and directly hosts the `inception` plugin. Claude Code can add `marvellousnishith/inception` as a marketplace and install `inception@marvellousnishith`. Codex uses its own compatibility manifest and marketplace catalog. Generated standalone packages remain available in `dist/`.
 
@@ -9,8 +9,8 @@ The GitHub repository root acts as the `marvellousnishith` marketplace and direc
 ## Official documentation
 
 - [Codex: Package your plugin](https://developers.openai.com/plugins/build/plugins) — package layout, compatibility manifest, local marketplace registration and installation.
-- [Codex: Skills](https://developers.openai.com/plugins/concepts/skills) — skill structure and metadata.
+- [Codex: Skills](https://developers.openai.com/codex/skills/) — skill structure, `$` invocation, and plugin distribution.
 - [Claude Code: Plugins overview](https://code.claude.com/docs/en/plugins) — native plugin manifest, plugin components, and `--plugin-dir` development loading.
 - [Claude Code: Skills](https://code.claude.com/docs/en/skills) — `SKILL.md` behavior and skill discovery.
 
-Host behavior and supported fields can change. Codex and Claude Code have different component formats and invocation conventions; this release verifies packaging structure but does not claim feature parity beyond carrying the shared skill.
+Host behavior and supported fields can change. The shared skill source is packaged for both hosts, while invocation differs: Codex uses `$zensical-docs` or the skill picker, and Claude Code uses `/inception:zensical-docs`. Repository validation verifies packaging structure but does not replace loading and invoking the plugin in each host.

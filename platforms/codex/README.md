@@ -16,6 +16,40 @@ Install Inception from the command line:
 codex plugin add inception@marvellousnishith
 ```
 
+### Update the installed plugin
+
+Refresh the GitHub marketplace:
+
+```sh
+codex plugin marketplace upgrade marvellousnishith
+```
+
+Restart the ChatGPT desktop app and open a new chat to load the refreshed plugin. For a locally built package, first
+rebuild it and update the copy in your local marketplace, then restart the app.
+
+## Use the workflows
+
+In Codex, invoke `$plan` to get a plan without implementation changes. Invoke `$zensical-docs` to create or improve a
+beginner-friendly Zensical documentation site in the current repository. You can also choose either skill from the
+skill picker.
+
+## Try from a local checkout
+
+Add the repository checkout as a marketplace:
+
+```sh
+codex plugin marketplace add /absolute/path/to/agents
+```
+
+Install Inception from that marketplace:
+
+```sh
+codex plugin add inception@marvellousnishith
+```
+
+Use `$plan` or `$zensical-docs` in Codex. This uses the repository root marketplace and does not change global Codex
+configuration.
+
 ## Try a generated package locally
 
 Build from the repository root with `npm run build`. To use the documented local marketplace flow in Codex, copy `dist/codex/` into a plugin directory within a local marketplace root, then register a `marketplace.json` there that points to it. For example, with the package copied to `./plugins/inception`, add:
