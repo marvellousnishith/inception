@@ -1,12 +1,15 @@
 ---
 name: zensical-docs
-description: Create or improve a complete, beginner-friendly Zensical documentation site in the current repository. Use when asked to document, set up, or maintain a project's Zensical site.
+description: Create or improve a complete, beginner-friendly Zensical documentation site in a project folder chosen by the user. Use when asked to document, set up, or maintain a project's Zensical site.
 ---
 
 # Create or improve a Zensical documentation site
 
-Work in the repository the user identifies, usually the current working directory. Inspect before editing. Complete the
-requested documentation work, preserve unrelated changes, and report what changed and how to use it.
+Work in the project folder the user identifies. Before creating a site, if the user has not specified its location,
+ask whether to create or update it in the current folder or in a new folder. Do not assume the current folder. If they
+choose a new folder, ask for its path or name when unclear, inspect the destination and its parent before creating
+anything, and preserve existing files. Complete the requested documentation work and report what changed and how to use
+it.
 
 ## Inspect the project first
 
