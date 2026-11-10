@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-revision-001",
+  "workflow": { "id": "ai-sdlc", "version": "0.1.0" },
+  "status": "active",
+  "current_stream_id": "stream-2",
+  "created_at": "2026-11-06T09:00:00Z",
+  "updated_at": "2026-11-06T11:00:00Z",
+  "inputs": [
+    {
+      "input_id": "input-ask-1",
+      "type": "text",
+      "source": "user",
+      "text": "Build a tool for tracking project work."
+    },
+    {
+      "input_id": "input-revision-1",
+      "type": "text",
+      "source": "user",
+      "text": "Revise the requirements to include external collaborators."
+    }
+  ],
+  "streams": [
+    {
+      "stream_id": "stream-1",
+      "status": "stale",
+      "parent_stream_id": null,
+      "branch_point": null,
+      "created_at": "2026-11-06T09:00:00Z",
+      "stages": {
+        "intent": { "status": "completed", "attempts": [] },
+        "requirement-analysis": { "status": "completed", "attempts": [] },
+        "discovery": { "status": "completed", "attempts": [] },
+        "architecture": { "status": "completed", "attempts": [] },
+        "backlog": { "status": "in_progress", "attempts": [] },
+        "planning": { "status": "pending", "attempts": [] }
+      }
+    },
+    {
+      "stream_id": "stream-2",
+      "status": "current",
+      "parent_stream_id": "stream-1",
+      "branch_point": "requirement-analysis",
+      "created_at": "2026-11-06T11:00:00Z",
+      "stages": {
+        "intent": {
+          "status": "completed",
+          "carried_from": { "stream_id": "stream-1", "stage_id": "intent" },
+          "attempts": []
+        },
+        "requirement-analysis": {
+          "status": "in_progress",
+          "attempts": [
+            {
+              "attempt_id": "attempt-requirements-revision-1",
+              "status": "in_progress",
+              "started_at": "2026-11-06T11:00:00Z",
+              "completed_at": null,
+              "inputs": [{ "type": "run_input", "input_id": "input-revision-1" }],
+              "outputs": { "artifacts": [] },
+              "error": null
+            }
+          ]
+        },
+        "discovery": { "status": "pending", "attempts": [] },
+        "architecture": { "status": "pending", "attempts": [] },
+        "backlog": { "status": "pending", "attempts": [] },
+        "planning": { "status": "pending", "attempts": [] }
+      }
+    }
+  ]
+}

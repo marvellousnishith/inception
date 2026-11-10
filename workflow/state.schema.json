@@ -1,0 +1,436 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI SDLC Workflow State",
+  "description": "Runtime state for one AI SDLC workflow run.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "workflow",
+    "status",
+    "current_stream_id",
+    "created_at",
+    "updated_at",
+    "inputs",
+    "streams"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of this state schema, independent of the workflow definition version."
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "active",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "current_stream_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "References the current stream while active; retains the last stream ID after the run ends."
+    },
+    "created_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/runInput"
+      }
+    },
+    "streams": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/stream"
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "runInput": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "input_id",
+            "type",
+            "source",
+            "text"
+          ],
+          "properties": {
+            "input_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "const": "text"
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "text": {
+              "type": "string"
+            },
+            "created_at": {
+              "$ref": "#/$defs/timestamp"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "input_id",
+            "type",
+            "source",
+            "location",
+            "origin"
+          ],
+          "properties": {
+            "input_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "const": "artifact"
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "location": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            },
+            "origin": {
+              "$ref": "#/$defs/userProvidedOrigin"
+            },
+            "created_at": {
+              "$ref": "#/$defs/timestamp"
+            }
+          }
+        }
+      ]
+    },
+    "userProvidedOrigin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "source"
+      ],
+      "properties": {
+        "type": {
+          "const": "user_provided"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifactOrigin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "stream_id",
+        "stage_id"
+      ],
+      "properties": {
+        "type": {
+          "const": "workflow_generated"
+        },
+        "stream_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifactReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "location",
+        "origin"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/artifactOrigin"
+            },
+            {
+              "$ref": "#/$defs/userProvidedOrigin"
+            }
+          ]
+        }
+      }
+    },
+    "attemptInput": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "input_id"
+          ],
+          "properties": {
+            "type": {
+              "const": "run_input"
+            },
+            "input_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/artifactReference"
+        }
+      ]
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attempt_id",
+        "status",
+        "started_at",
+        "inputs",
+        "outputs",
+        "error"
+      ],
+      "properties": {
+        "attempt_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "in_progress",
+            "completed",
+            "failed"
+          ]
+        },
+        "started_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "completed_at": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attemptInput"
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "artifacts"
+          ],
+          "properties": {
+            "artifacts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/artifactReference"
+              }
+            }
+          }
+        },
+        "error": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "result": {
+          "type": "string",
+          "description": "Outcome or completion note, including when a stage completes without producing an artifact."
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "attempts"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "blocked",
+            "failed",
+            "skipped"
+          ]
+        },
+        "carried_from": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stream_id",
+            "stage_id"
+          ],
+          "properties": {
+            "stream_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "stage_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attempt"
+          }
+        },
+        "blocked_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "skip_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "user_acknowledged_impact": {
+          "type": "boolean"
+        }
+      }
+    },
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stream_id",
+        "status",
+        "parent_stream_id",
+        "branch_point",
+        "created_at",
+        "stages"
+      ],
+      "properties": {
+        "stream_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "current",
+            "stale",
+            "completed"
+          ]
+        },
+        "parent_stream_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "branch_point": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "stages": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/stage"
+          }
+        }
+      }
+    }
+  }
+}

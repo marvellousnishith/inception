@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "start_workflow output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "current_stream_id",
+    "status",
+    "ready_stage_ids"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "current_stream_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "const": "active"
+    },
+    "ready_stage_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  }
+}

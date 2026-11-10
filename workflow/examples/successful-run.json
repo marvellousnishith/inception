@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-success-001",
+  "workflow": {
+    "id": "ai-sdlc",
+    "version": "0.1.0"
+  },
+  "status": "completed",
+  "current_stream_id": "stream-1",
+  "created_at": "2026-11-06T09:00:00Z",
+  "updated_at": "2026-11-06T11:30:00Z",
+  "inputs": [
+    {
+      "input_id": "input-ask-1",
+      "type": "text",
+      "source": "user",
+      "text": "Create a lightweight tool for teams to track project work."
+    }
+  ],
+  "streams": [
+    {
+      "stream_id": "stream-1",
+      "status": "completed",
+      "parent_stream_id": null,
+      "branch_point": null,
+      "created_at": "2026-11-06T09:00:00Z",
+      "stages": {
+        "intent": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-intent-1",
+              "status": "completed",
+              "started_at": "2026-11-06T09:00:00Z",
+              "completed_at": "2026-11-06T09:10:00Z",
+              "inputs": [
+                { "type": "run_input", "input_id": "input-ask-1" }
+              ],
+              "outputs": {
+                "artifacts": [
+                  {
+                    "name": "intent-statement",
+                    "type": "intent-document",
+                    "location": "artifacts/stream-1/intent.md",
+                    "revision": "rev-intent-1",
+                    "origin": {
+                      "type": "workflow_generated",
+                      "stream_id": "stream-1",
+                      "stage_id": "intent"
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ]
+        },
+        "requirement-analysis": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-requirements-1",
+              "status": "completed",
+              "started_at": "2026-11-06T09:10:00Z",
+              "completed_at": "2026-11-06T09:30:00Z",
+              "inputs": [
+                {
+                  "name": "intent-statement",
+                  "type": "intent-document",
+                  "location": "artifacts/stream-1/intent.md",
+                  "revision": "rev-intent-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "intent"
+                  }
+                }
+              ],
+              "outputs": {
+                "artifacts": [
+                  {
+                    "name": "requirements-document",
+                    "type": "requirements-document",
+                    "location": "artifacts/stream-1/requirements.md",
+                    "revision": "rev-requirements-1",
+                    "origin": {
+                      "type": "workflow_generated",
+                      "stream_id": "stream-1",
+                      "stage_id": "requirement-analysis"
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ]
+        },
+        "discovery": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-discovery-1",
+              "status": "completed",
+              "started_at": "2026-11-06T09:30:00Z",
+              "completed_at": "2026-11-06T09:45:00Z",
+              "inputs": [
+                {
+                  "name": "requirements-document",
+                  "type": "requirements-document",
+                  "location": "artifacts/stream-1/requirements.md",
+                  "revision": "rev-requirements-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "requirement-analysis"
+                  }
+                }
+              ],
+              "outputs": {
+                "artifacts": [
+                  {
+                    "name": "discovery-document",
+                    "type": "discovery-document",
+                    "location": "artifacts/stream-1/discovery.md",
+                    "revision": "rev-discovery-1",
+                    "origin": {
+                      "type": "workflow_generated",
+                      "stream_id": "stream-1",
+                      "stage_id": "discovery"
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ]
+        },
+        "architecture": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-architecture-1",
+              "status": "completed",
+              "started_at": "2026-11-06T09:45:00Z",
+              "completed_at": "2026-11-06T10:15:00Z",
+              "inputs": [
+                {
+                  "name": "requirements-document",
+                  "type": "requirements-document",
+                  "location": "artifacts/stream-1/requirements.md",
+                  "revision": "rev-requirements-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "requirement-analysis"
+                  }
+                },
+                {
+                  "name": "discovery-document",
+                  "type": "discovery-document",
+                  "location": "artifacts/stream-1/discovery.md",
+                  "revision": "rev-discovery-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "discovery"
+                  }
+                }
+              ],
+              "outputs": {
+                "artifacts": [
+                  {
+                    "name": "solution-document",
+                    "type": "solution-document",
+                    "location": "artifacts/stream-1/solution.md",
+                    "revision": "rev-solution-1",
+                    "origin": {
+                      "type": "workflow_generated",
+                      "stream_id": "stream-1",
+                      "stage_id": "architecture"
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ]
+        },
+        "backlog": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-backlog-1",
+              "status": "completed",
+              "started_at": "2026-11-06T10:15:00Z",
+              "completed_at": "2026-11-06T10:45:00Z",
+              "inputs": [
+                {
+                  "name": "solution-document",
+                  "type": "solution-document",
+                  "location": "artifacts/stream-1/solution.md",
+                  "revision": "rev-solution-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "architecture"
+                  }
+                },
+                {
+                  "name": "requirements-document",
+                  "type": "requirements-document",
+                  "location": "artifacts/stream-1/requirements.md",
+                  "revision": "rev-requirements-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "requirement-analysis"
+                  }
+                }
+              ],
+              "outputs": {
+                "artifacts": [
+                  {
+                    "name": "backlog",
+                    "type": "backlog",
+                    "location": "artifacts/stream-1/backlog.md",
+                    "revision": "rev-backlog-1",
+                    "origin": {
+                      "type": "workflow_generated",
+                      "stream_id": "stream-1",
+                      "stage_id": "backlog"
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ]
+        },
+        "planning": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-planning-1",
+              "status": "completed",
+              "started_at": "2026-11-06T10:45:00Z",
+              "completed_at": "2026-11-06T11:30:00Z",
+              "inputs": [
+                {
+                  "name": "backlog",
+                  "type": "backlog",
+                  "location": "artifacts/stream-1/backlog.md",
+                  "revision": "rev-backlog-1",
+                  "origin": {
+                    "type": "workflow_generated",
+                    "stream_id": "stream-1",
+                    "stage_id": "backlog"
+                  }
+                }
+              ],
+              "outputs": {
+                "artifacts": [
+                  {
+                    "name": "delivery-plan",
+                    "type": "delivery-plan",
+                    "location": "artifacts/stream-1/planning.md",
+                    "revision": "rev-planning-1",
+                    "origin": {
+                      "type": "workflow_generated",
+                      "stream_id": "stream-1",
+                      "stage_id": "planning"
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
