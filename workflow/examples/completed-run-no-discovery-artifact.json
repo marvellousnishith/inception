@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-no-discovery-001",
+  "workflow": { "id": "ai-sdlc", "version": "0.1.0" },
+  "status": "completed",
+  "current_stream_id": "stream-1",
+  "created_at": "2026-11-06T09:00:00Z",
+  "updated_at": "2026-11-06T11:30:00Z",
+  "inputs": [
+    {
+      "input_id": "input-ask-1",
+      "type": "text",
+      "source": "user",
+      "text": "Document a small feature change with no existing project materials to inspect."
+    }
+  ],
+  "streams": [
+    {
+      "stream_id": "stream-1",
+      "status": "completed",
+      "parent_stream_id": null,
+      "branch_point": null,
+      "created_at": "2026-11-06T09:00:00Z",
+      "stages": {
+        "intent": { "status": "completed", "attempts": [] },
+        "requirement-analysis": { "status": "completed", "attempts": [] },
+        "discovery": {
+          "status": "completed",
+          "attempts": [
+            {
+              "attempt_id": "attempt-discovery-1",
+              "status": "completed",
+              "started_at": "2026-11-06T09:30:00Z",
+              "completed_at": "2026-11-06T09:35:00Z",
+              "inputs": [],
+              "outputs": { "artifacts": [] },
+              "error": null,
+              "result": "No user-provided materials or other relevant resources were available to discover; no discovery document was needed."
+            }
+          ]
+        },
+        "architecture": { "status": "completed", "attempts": [] },
+        "backlog": { "status": "completed", "attempts": [] },
+        "planning": { "status": "completed", "attempts": [] }
+      }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+id: ai-sdlc
+name: AI SDLC
+description: Workflow for clarifying an ask, developing requirements, discovering relevant resources, designing a solution, and planning its delivery.
+version: 0.1.0
+owner: TBD
+
+stages:
+  - id: intent
+    name: Intent
+    description: Narrow the provided ask into the actual need, goals, scope, and constraints.
+    order: 1
+    depends_on: []
+    completion_criteria:
+      - The actual need, goals, scope, and known constraints are captured in an agreed intent statement.
+
+  - id: requirement-analysis
+    name: Requirement Analysis
+    description: Understand the intent and develop thorough, clear requirements.
+    order: 2
+    depends_on:
+      - intent
+    completion_criteria:
+      - Requirements are documented clearly enough to guide discovery and solution design.
+
+  - id: discovery
+    name: Discovery
+    description: Use the requirements and user-provided artifacts to identify relevant resources, systems, capabilities, and constraints. Inspect the repository or filesystem when the user requests it; if workspace inspection would help and has not been requested, ask the user.
+    order: 3
+    depends_on:
+      - requirement-analysis
+    completion_criteria:
+      - Discovery findings, including that no further discovery is needed, are recorded in workflow state.
+      - A discovery document is produced when there are findings worth documenting.
+
+  - id: architecture
+    name: Architecture
+    description: Use the requirements and discovery findings to design the proposed solution.
+    order: 4
+    depends_on:
+      - requirement-analysis
+      - discovery
+    completion_criteria:
+      - The proposed solution is documented in a solution document.
+
+  - id: backlog
+    name: Backlog
+    description: Break the solution into traceable, actionable work items.
+    order: 5
+    depends_on:
+      - architecture
+    completion_criteria:
+      - Actionable backlog items are documented and linked to relevant requirements and solution elements.
+
+  - id: planning
+    name: Planning
+    description: Organize the backlog into a delivery sequence or plan.
+    order: 6
+    depends_on:
+      - backlog
+    completion_criteria:
+      - A delivery plan is documented based on the backlog.

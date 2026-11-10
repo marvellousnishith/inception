@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "start_workflow input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workflow_id",
+    "project_root",
+    "initial_input"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier of the installed workflow definition, such as ai-sdlc."
+    },
+    "project_root": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path to the project directory where workflow state will be stored."
+    },
+    "initial_input": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Initial user-provided text for this workflow run."
+    }
+  }
+}
